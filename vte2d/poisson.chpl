@@ -51,8 +51,6 @@ proc sor(ref u : [?D], rhs, h, RTOL=1.0e-6, ITMAX=1000)
          u[i,j] = (1.0 - r) * u[i,j] + r * tmp;
       }
 
-      u.updateFluff();
-
       res = residual(u, rhs, h);
       it += 1;
    }
