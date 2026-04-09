@@ -37,15 +37,15 @@ proc write_vtk(x : [?Dx] real,
    try! fw.writeln(cycle);
    try! fw.writef ("DIMENSIONS %i %i 1\n", nx, ny);
 
-   try! fw.writef ("X_COORDINATES  %i  float\n", nx);
+   try! fw.writef ("X_COORDINATES  %i  double\n", nx);
    for v in x do
       try! fw.writeln(v);
 
-   try! fw.writef ("Y_COORDINATES  %i  float\n", ny);
+   try! fw.writef ("Y_COORDINATES  %i  double\n", ny);
    for v in y do
       try! fw.writeln(v);
 
-   try! fw.writef ("Z_COORDINATES  1  float\n");
+   try! fw.writef ("Z_COORDINATES  1  double\n");
    try! fw.writeln(0.0);
 
    try! fw.writef("POINT_DATA  %i\n", nx * ny);
@@ -66,7 +66,7 @@ proc write_vtk(names : ?S,
 
    if isReal(T) && isString(S) // u is array of reals
    {
-      try! fw.writef("SCALARS %s float\n", names);
+      try! fw.writef("SCALARS %s double\n", names);
       try! fw.writef("LOOKUP_TABLE default\n");
       for j in D.dim(1) do
          for i in D.dim(0) do
@@ -78,7 +78,7 @@ proc write_vtk(names : ?S,
       assert(nc == names.size, "Inconsistent size of names");
       for (c,name) in zip(0..nc-1,names)
       {
-         try! fw.writef("SCALARS %s float\n", name);
+         try! fw.writef("SCALARS %s double\n", name);
          try! fw.writef("LOOKUP_TABLE default\n");
          for j in D.dim(1) do
             for i in D.dim(0) do
@@ -91,7 +91,7 @@ proc write_vtk(names : ?S,
       assert(dom1d.size == names.size, "Inconsistent size of names");
       for (c,name) in zip(dom1d,names)
       {
-         try! fw.writef("SCALARS %s float\n", name);
+         try! fw.writef("SCALARS %s double\n", name);
          try! fw.writef("LOOKUP_TABLE default\n");
          for j in D.dim(1) do
             for i in D.dim(0) do
